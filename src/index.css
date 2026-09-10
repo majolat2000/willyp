@@ -1,1 +1,54 @@
 @import "tailwindcss";
+
+/* =========================================================
+   EXECUTIVE 1-PAGE CV PRINT ENGINE
+   Guarantees standard 1-page PDF/print output across browsers
+   ========================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm 8mm 10mm;
+  }
+
+  /* Reset body and html margins */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Hide everything on screen except print-specific content */
+  .no-print,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Executive sheet dimensions & page-break prevention */
+  .executive-resume-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    break-inside: avoid !important;
+    break-after: avoid !important;
+    break-before: avoid !important;
+  }
+
+  /* Force background colors and borders to print vividly */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

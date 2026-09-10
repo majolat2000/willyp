@@ -13,17 +13,20 @@ import { CareerVisionSection } from './components/CareerVisionSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ResumeModal } from './components/ResumeModal';
+import { ExecutiveResumeSheet } from './components/ExecutiveResumeSheet';
 
 export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white text-slate-800 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
-      {/* Navigation Bar */}
-      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+      {/* Navigation Bar (Hidden when printing) */}
+      <div className="print:hidden">
+        <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+      </div>
 
-      {/* Main Content Sections */}
-      <main className="flex-1">
+      {/* Main Content Sections (Hidden when printing so only the 1-page CV prints) */}
+      <main className="flex-1 print:hidden">
         <Hero onOpenResume={() => setIsResumeOpen(true)} />
         <AboutSection onOpenResume={() => setIsResumeOpen(true)} />
         <SkillsSection />
@@ -32,10 +35,17 @@ export default function App() {
         <ContactSection />
       </main>
 
-      {/* Footer */}
-      <Footer onOpenResume={() => setIsResumeOpen(true)} />
+      {/* Footer (Hidden when printing) */}
+      <div className="print:hidden">
+        <Footer onOpenResume={() => setIsResumeOpen(true)} />
+      </div>
 
-      {/* Executive CV / Resume Modal */}
+      {/* Dedicated Executive 1-Page Printable CV Sheet (Only visible during print / PDF generation) */}
+      <div className="hidden print:block">
+        <ExecutiveResumeSheet isPreview={false} />
+      </div>
+
+      {/* Executive CV / Resume Modal (For interactive on-screen viewing & quick copy/print) */}
       <ResumeModal
         isOpen={isResumeOpen}
         onClose={() => setIsResumeOpen(false)}
@@ -43,3 +53,4 @@ export default function App() {
     </div>
   );
 }
+

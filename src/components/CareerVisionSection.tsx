@@ -26,6 +26,7 @@ import {
   CheckCircle2,
   ArrowRight,
 } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export const CareerVisionSection: React.FC = () => {
   const getCareerIcon = (iconName: string) => {
@@ -81,7 +82,13 @@ export const CareerVisionSection: React.FC = () => {
     <section id="vision" className="py-20 lg:py-28 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+        >
           <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-indigo-600 uppercase">
             TRAJECTORY &amp; FOUNDATION
           </span>
@@ -92,12 +99,18 @@ export const CareerVisionSection: React.FC = () => {
           <p className="text-slate-600 text-base sm:text-lg pt-2">
             Where institutional political foresight converges with modern financial market execution.
           </p>
-        </div>
+        </motion.div>
 
         {/* Career Vision Hero Callout */}
-        <div className="bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 mb-16 shadow-xl relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          className="bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 mb-16 shadow-xl relative overflow-hidden group"
+        >
           {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-500/25 transition-all duration-700" />
 
           <div className="relative z-10 max-w-4xl space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-wider border border-indigo-400/20">
@@ -121,9 +134,9 @@ export const CareerVisionSection: React.FC = () => {
                 {CAREER_PILLARS.map((pillar) => (
                   <div
                     key={pillar.title}
-                    className="p-3.5 bg-slate-800/80 hover:bg-slate-800 rounded-xl border border-slate-700/70 transition-colors"
+                    className="p-3.5 bg-slate-800/80 hover:bg-slate-800 rounded-xl border border-slate-700/70 hover:border-indigo-400/60 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group/pillar cursor-default"
                   >
-                    <div className="p-2 bg-indigo-950/80 rounded-lg w-fit mb-2">
+                    <div className="p-2 bg-indigo-950/80 rounded-lg w-fit mb-2 group-hover/pillar:scale-110 transition-transform">
                       {getCareerIcon(pillar.iconName)}
                     </div>
                     <div className="text-sm font-bold text-white">{pillar.title}</div>
@@ -135,12 +148,18 @@ export const CareerVisionSection: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Two-Column Grid: Academic Focus (Left) & Education + Values (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Left Column: Academic Focus at Crawford University */}
-          <div className="lg:col-span-7 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 space-y-6"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
@@ -163,10 +182,10 @@ export const CareerVisionSection: React.FC = () => {
               {ACADEMIC_SUBJECTS.map((subject) => (
                 <div
                   key={subject.name}
-                  className="p-4 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-indigo-300 transition-all hover:shadow-xs group"
+                  className="p-4 bg-slate-50 hover:bg-white rounded-2xl border border-slate-200/80 hover:border-indigo-300 hover:shadow-md hover:translate-x-1 transition-all duration-200 group"
                 >
                   <div className="flex items-start gap-3.5">
-                    <div className="p-2 bg-white rounded-xl border border-slate-200/80 group-hover:border-indigo-200 shadow-2xs shrink-0">
+                    <div className="p-2 bg-white rounded-xl border border-slate-200/80 group-hover:border-indigo-200 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
                       {getAcademicIcon(subject.iconName)}
                     </div>
                     <div className="flex-1">
@@ -187,10 +206,16 @@ export const CareerVisionSection: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Education Card & Core Values */}
-          <div className="lg:col-span-5 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 space-y-8"
+          >
             {/* Education Timeline Box */}
             <div className="space-y-4">
               <span className="text-xs font-bold uppercase tracking-widest text-indigo-600">
@@ -237,12 +262,12 @@ export const CareerVisionSection: React.FC = () => {
                 {VALUES.map((val) => (
                   <div
                     key={val.title}
-                    className="p-4 bg-white rounded-xl border border-slate-200/80 shadow-xs hover:border-indigo-300 transition-colors"
+                    className="p-4 bg-white rounded-xl border border-slate-200/80 shadow-xs hover:border-indigo-300 hover:shadow-md hover:-translate-y-1 transition-all duration-200 group"
                   >
-                    <div className="p-2 bg-slate-100 rounded-lg w-fit mb-2">
+                    <div className="p-2 bg-slate-100 rounded-lg w-fit mb-2 group-hover:bg-indigo-50 transition-colors">
                       {getValueIcon(val.iconName)}
                     </div>
-                    <h5 className="text-sm font-bold text-slate-900">{val.title}</h5>
+                    <h5 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">{val.title}</h5>
                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">
                       {val.description}
                     </p>
@@ -250,7 +275,7 @@ export const CareerVisionSection: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -13,6 +13,7 @@ import {
   Wallet,
   Building,
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const ProjectsSection: React.FC = () => {
   const [selectedProjectId, setSelectedProjectId] = useState<string>(PROJECTS[0].id);
@@ -39,7 +40,13 @@ export const ProjectsSection: React.FC = () => {
     <section id="projects" className="py-20 lg:py-28 bg-slate-50/60 border-t border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+        >
           <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-indigo-600 uppercase">
             PORTFOLIO &amp; WORK
           </span>
@@ -50,7 +57,7 @@ export const ProjectsSection: React.FC = () => {
           <p className="text-slate-600 text-base sm:text-lg pt-2">
             Hands-on financial research, domestic equities analysis, and empirical personal capital management.
           </p>
-        </div>
+        </motion.div>
 
         {/* Project Selection Tabs */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -58,10 +65,10 @@ export const ProjectsSection: React.FC = () => {
             <button
               key={project.id}
               onClick={() => setSelectedProjectId(project.id)}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold tracking-wider uppercase transition-all flex items-center gap-2 ${
+              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold tracking-wider uppercase transition-all duration-200 flex items-center gap-2 cursor-pointer ${
                 selectedProjectId === project.id
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 scale-[1.02]'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 hover:shadow-xs'
               }`}
             >
               {project.id === 'nigerian-equities-research' ? (
@@ -75,7 +82,13 @@ export const ProjectsSection: React.FC = () => {
         </div>
 
         {/* Main Active Project Card */}
-        <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden mb-12">
+        <motion.div
+          key={currentProject.id}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden mb-12"
+        >
           <div className="p-6 sm:p-10 lg:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
               {/* Left Column: Project Overview & Core Bullet Points */}
@@ -294,7 +307,7 @@ export const ProjectsSection: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

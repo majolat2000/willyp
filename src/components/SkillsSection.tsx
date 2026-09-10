@@ -14,6 +14,7 @@ import {
   ChevronRight,
   Sparkles,
 } from 'lucide-react';
+import { motion } from 'motion/react';
 
 export const SkillsSection: React.FC = () => {
   const [activeCompetency, setActiveCompetency] = useState<string>(COMPETENCIES[0].id);
@@ -54,7 +55,13 @@ export const SkillsSection: React.FC = () => {
     <section id="skills" className="py-20 lg:py-28 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+        >
           <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-indigo-600 uppercase">
             SERVICE OFFERS &amp; EXPERTISE
           </span>
@@ -65,20 +72,24 @@ export const SkillsSection: React.FC = () => {
           <p className="text-slate-600 text-base sm:text-lg pt-2">
             Combining rigorous political analysis with quantitative financial models to unlock high-conviction insights.
           </p>
-        </div>
+        </motion.div>
 
-        {/* 4 Core Skills Cards (Satner style grid) */}
+        {/* 4 Core Skills Cards (Satner style grid) with Staggered Scroll & Hover Lift */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-20">
-          {CORE_SKILLS.map((skill) => (
-            <div
+          {CORE_SKILLS.map((skill, index) => (
+            <motion.div
               key={skill.id}
-              className="bg-white border border-slate-200/80 hover:border-indigo-300 rounded-2xl p-7 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white border border-slate-200/80 hover:border-indigo-400 rounded-2xl p-7 shadow-xs hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden cursor-default"
             >
               {/* Subtle top indicator highlight */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div>
-                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-indigo-100 transition-all duration-300">
                   {getSkillIcon(skill.iconName)}
                 </div>
 
@@ -86,7 +97,7 @@ export const SkillsSection: React.FC = () => {
                   {skill.subtitle}
                 </div>
 
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors duration-200">
                   {skill.title}
                 </h3>
 
@@ -95,23 +106,29 @@ export const SkillsSection: React.FC = () => {
                 </p>
               </div>
 
-              {/* Tag Badges */}
+              {/* Tag Badges with Micro Hover */}
               <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-100">
                 {skill.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-slate-50 text-slate-600 border border-slate-200/60"
+                    className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-slate-50 text-slate-600 border border-slate-200/60 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200 transition-colors duration-150"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* "What I'm Good At" Section (Pillars Showcase) */}
-        <div className="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10 lg:p-12">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          className="bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-10 lg:p-12"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left side info */}
             <div className="lg:col-span-5 space-y-4">
@@ -130,7 +147,7 @@ export const SkillsSection: React.FC = () => {
               {(() => {
                 const active = COMPETENCIES.find((c) => c.id === activeCompetency) || COMPETENCIES[0];
                 return (
-                  <div className="mt-6 p-5 bg-white rounded-2xl border border-indigo-100 shadow-sm space-y-3">
+                  <div className="mt-6 p-5 bg-white rounded-2xl border border-indigo-100 shadow-sm space-y-3 hover:shadow-md transition-shadow">
                     <div className="flex items-center gap-2.5 text-indigo-700 font-bold text-sm">
                       {getCompetencyIcon(active.iconName)}
                       <span>{active.title}</span>
@@ -140,7 +157,7 @@ export const SkillsSection: React.FC = () => {
                     </p>
                     <div className="pt-2 flex items-center justify-between text-xs text-slate-500 border-t border-slate-100">
                       <span>Framework: <strong className="text-slate-700">{active.metricLabel}</strong></span>
-                      <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 font-bold rounded-md">{active.metricValue}</span>
+                      <span className="px-2.5 py-0.5 bg-indigo-50 text-indigo-600 font-bold rounded-md">{active.metricValue}</span>
                     </div>
                   </div>
                 );
@@ -155,14 +172,14 @@ export const SkillsSection: React.FC = () => {
                   <button
                     key={comp.id}
                     onClick={() => setActiveCompetency(comp.id)}
-                    className={`w-full text-left p-4 sm:p-5 rounded-xl transition-all flex items-start gap-4 border ${
+                    className={`w-full text-left p-4 sm:p-5 rounded-xl transition-all duration-200 flex items-start gap-4 border cursor-pointer ${
                       isSelected
-                        ? 'bg-white border-indigo-600 shadow-md ring-2 ring-indigo-500/10'
-                        : 'bg-white/70 border-slate-200/80 hover:bg-white hover:border-slate-300'
+                        ? 'bg-white border-indigo-600 shadow-md ring-2 ring-indigo-500/10 -translate-x-1'
+                        : 'bg-white/70 border-slate-200/80 hover:bg-white hover:border-slate-300 hover:shadow-xs hover:translate-x-0.5'
                     }`}
                   >
                     <div
-                      className={`p-2.5 rounded-lg shrink-0 ${
+                      className={`p-2.5 rounded-lg shrink-0 transition-colors duration-200 ${
                         isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700'
                       }`}
                     >
@@ -171,14 +188,14 @@ export const SkillsSection: React.FC = () => {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
                         <h4
-                          className={`text-sm sm:text-base font-bold truncate ${
+                          className={`text-sm sm:text-base font-bold truncate transition-colors ${
                             isSelected ? 'text-indigo-600' : 'text-slate-900'
                           }`}
                         >
                           {comp.title}
                         </h4>
                         <ChevronRight
-                          className={`w-4 h-4 shrink-0 transition-transform ${
+                          className={`w-4 h-4 shrink-0 transition-all ${
                             isSelected ? 'text-indigo-600 translate-x-1' : 'text-slate-400'
                           }`}
                         />
@@ -192,8 +209,9 @@ export const SkillsSection: React.FC = () => {
               })}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
+
