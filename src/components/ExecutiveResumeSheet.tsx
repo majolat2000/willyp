@@ -282,10 +282,10 @@ export const ExecutiveResumeSheet: React.FC<ExecutiveResumeSheetProps> = ({ isPr
       {/* ===================== FOOTER ===================== */}
       <footer className="mt-3.5 pt-2 border-t border-slate-200 flex items-center justify-between text-[9px] text-slate-600">
         <span>
-          <strong>William Okafor</strong> — Curriculum Vitae • Executive Format
+          <strong>William Okafor</strong> — Curriculum Vitae
         </span>
         <span className="font-semibold text-indigo-700">
-          Standard 1-Page Executive PDF • Crawford University
+          Crawford University
         </span>
       </footer>
     </div>

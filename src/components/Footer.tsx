@@ -103,7 +103,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
               className="w-full py-2.5 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              <span>View Executive CV</span>
+              <span>View Curriculum Vitae</span>
             </button>
           </div>
         </div>
