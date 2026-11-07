@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X, Printer, Copy, Check, FileText } from 'lucide-react';
-import { PERSONAL_INFO, PROJECTS } from '../data/portfolioData';
+import { PERSONAL_INFO, VOLUNTEER_WAYS } from '../data/portfolioData';
 import { ExecutiveResumeSheet } from './ExecutiveResumeSheet';
 
 interface ResumeModalProps {
@@ -39,31 +39,31 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
     const text = `
 ${PERSONAL_INFO.fullName.toUpperCase()}
 ${PERSONAL_INFO.roleTitle}
-${PERSONAL_INFO.location} | ${PERSONAL_INFO.email} | https://${PERSONAL_INFO.website}
+${PERSONAL_INFO.location} | ${PERSONAL_INFO.email} | willyp.com.ng
 
 PROFILE:
 ${PERSONAL_INFO.subheading}
-${PERSONAL_INFO.supportingText}
 
 EDUCATION:
-Crawford University — BSc Political Science
-October 2024 – September 2028
+${PERSONAL_INFO.education.institution} — ${PERSONAL_INFO.education.degree}
+Timeline: ${PERSONAL_INFO.education.period}
+Status: ${PERSONAL_INFO.education.status}
 
-DEVELOPING CAPABILITIES:
-- Virtual Assistance: Internet & Online Research, Data Entry, Document Formatting, Inbox & Calendar Management, Directory Building.
-- Software: Microsoft Excel (developing proficiency), Google Workspace (Docs, Sheets, Slides, Drive), Microsoft Office.
-- Research & Analysis: Policy briefs, governance analysis, basic financial statement analysis, NGX equities research.
+DEVELOPING SKILLS:
+- Virtual Assistance: Internet & Online Research, Data Entry & Spreadsheet Organization, Document Preparation & Formatting, Email & Schedule Management, Drive Filing Systems.
+- Tools: Microsoft Excel (developing formulas: SUM, AVERAGE, IF, VLOOKUP), Google Workspace (Sheets, Docs, Slides, Drive).
+- Academic Studies: Governance, Public Policy Analysis, Political Economy, Institutional Frameworks, and reading basic company financial reports (for self-study).
 
-SELECTED DEMONSTRATION PROJECTS:
-${PROJECTS.map(
-  (p, i) => `${i + 1}. ${p.title} (${p.category} — ${p.projectType}, ${p.dateCompleted})
-   - ${p.shortDescription}
-   - Skills: ${p.skillsDemonstrated.join(', ')}`
+HOW I CAN HELP (VOLUNTEER & ENTRY-LEVEL SUPPORT):
+${VOLUNTEER_WAYS.map(
+  (w, i) => `${i + 1}. ${w.title}
+   - ${w.howICanHelp}
+   - Tasks: ${w.examples.join(', ')}`
 ).join('\n\n')}
 
-PHILOSOPHY:
-Curiosity, Attention to Detail, Consistency, and a Willingness to Learn.
-All financial research is for self-study and educational demonstration.
+WORK VALUES:
+Curiosity, Attention to Detail, Consistency, and Willingness to Learn.
+Available for remote volunteering, student internships, and administrative assistance.
     `.trim();
 
     navigator.clipboard.writeText(text);
@@ -79,7 +79,7 @@ All financial research is for self-study and educational demonstration.
           <div className="flex items-center gap-2">
             <FileText className="w-5 h-5 text-indigo-600" />
             <span className="font-bold text-slate-800 text-sm sm:text-base">
-              Curriculum Vitae / Resume — {PERSONAL_INFO.fullName}
+              Student Profile &amp; Resume — {PERSONAL_INFO.fullName}
             </span>
           </div>
 

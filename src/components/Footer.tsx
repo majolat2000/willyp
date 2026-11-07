@@ -16,7 +16,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           
-          {/* Brand & Identity (Exact Section 9 text) */}
+          {/* Brand & Identity */}
           <div className="md:col-span-6 space-y-3">
             <h3 className="text-xl font-bold text-white tracking-tight">
               {PERSONAL_INFO.fullName}
@@ -59,18 +59,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
                 </a>
               </li>
               <li>
-                <a href="#what-i-do" className="hover:text-white transition-colors">
-                  What I Do (Services &amp; Interests)
+                <a href="#skills" className="hover:text-white transition-colors">
+                  Skills &amp; Interests
                 </a>
               </li>
               <li>
-                <a href="#portfolio" className="hover:text-white transition-colors">
-                  Portfolio &amp; Projects
-                </a>
-              </li>
-              <li>
-                <a href="#learning" className="hover:text-white transition-colors">
-                  Learning, Building &amp; Growing
+                <a href="#volunteer" className="hover:text-white transition-colors">
+                  How I Can Help (Volunteer)
                 </a>
               </li>
               <li>
@@ -81,15 +76,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
             </ul>
           </div>
 
-          {/* Education & Curriculum Vitae */}
+          {/* Education Details & Resume */}
           <div className="md:col-span-3 space-y-3">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-300">
               Education Details
             </div>
             <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1 text-xs">
-              <div className="font-bold text-white">Crawford University</div>
-              <div className="text-slate-300 font-medium">BSc Political Science</div>
-              <div className="text-indigo-400 text-[11px] pt-1">October 2024 – September 2028</div>
+              <div className="font-bold text-white">{PERSONAL_INFO.education.institution}</div>
+              <div className="text-slate-300 font-medium">{PERSONAL_INFO.education.degree}</div>
+              <div className="text-indigo-400 text-[11px] pt-1">{PERSONAL_INFO.education.period}</div>
             </div>
 
             {onOpenResume && (
@@ -97,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
                 onClick={onOpenResume}
                 className="w-full py-2.5 text-xs font-semibold text-center text-slate-200 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 transition-colors cursor-pointer"
               >
-                View Complete Resume / CV
+                View Student Resume / CV
               </button>
             )}
           </div>

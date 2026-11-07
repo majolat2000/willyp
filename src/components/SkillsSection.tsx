@@ -1,29 +1,22 @@
 import React from 'react';
-import {
-  VA_SERVICES,
-  VA_SERVICES_INTRO,
-  ANALYSIS_AREAS,
-  ANALYSIS_SERVICES_INTRO,
-} from '../data/portfolioData';
+import { VA_SKILLS, INTEREST_AREAS } from '../data/portfolioData';
 import {
   Search,
   Table,
   FileSpreadsheet,
   FileText,
   MailCheck,
-  FolderTree,
   ClipboardList,
   Landmark,
   TrendingUp,
-  AlertCircle,
   CheckCircle2,
-  Sparkles,
-  ArrowRight,
+  AlertCircle,
+  HelpCircle,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export const SkillsSection: React.FC = () => {
-  const getVAIcon = (iconName: string) => {
+  const getVASkillIcon = (iconName: string) => {
     switch (iconName) {
       case 'Search':
         return <Search className="w-5 h-5 text-indigo-600" />;
@@ -35,8 +28,6 @@ export const SkillsSection: React.FC = () => {
         return <FileText className="w-5 h-5 text-amber-600" />;
       case 'MailCheck':
         return <MailCheck className="w-5 h-5 text-purple-600" />;
-      case 'FolderTree':
-        return <FolderTree className="w-5 h-5 text-teal-600" />;
       case 'ClipboardList':
         return <ClipboardList className="w-5 h-5 text-rose-600" />;
       default:
@@ -45,78 +36,75 @@ export const SkillsSection: React.FC = () => {
   };
 
   return (
-    <section id="what-i-do" className="py-20 lg:py-28 bg-slate-50/70 border-t border-slate-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+    <section id="skills" className="py-20 lg:py-24 bg-slate-50/70 border-t border-slate-200/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto space-y-3"
         >
           <span className="text-xs font-bold tracking-widest text-indigo-600 uppercase">
-            Services &amp; Areas of Interest
+            Practical Capabilities &amp; Study Areas
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight">
-            What I Do &amp; What I’m Building
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
+            Skills I’m Building &amp; Practicing
           </h2>
           <p className="text-slate-600 text-base sm:text-lg">
-            Practical administrative support for individuals and small businesses, alongside dedicated academic and independent research.
+            Instead of presenting exaggerated claims or simulated projects, here is an honest overview of what I know how to do, the tools I use, and the subjects I actively study.
           </p>
         </motion.div>
 
         {/* =========================================================================
-            CATEGORY A: VIRTUAL ASSISTANCE
+            PART 1: VIRTUAL ASSISTANCE & ADMINISTRATIVE SKILLS
            ========================================================================= */}
-        <div className="space-y-8">
-          <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-indigo-100/70 text-indigo-800 text-xs font-bold uppercase tracking-wider">
-              Category A
+        <div className="space-y-6">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-700">
+              Administrative &amp; Support Skills
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
-              {VA_SERVICES_INTRO.headline}
+            <h3 className="text-2xl font-bold text-slate-900">
+              Virtual Assistance &amp; Organization
             </h3>
-            <p className="text-lg font-medium text-slate-700 leading-relaxed">
-              {VA_SERVICES_INTRO.intro}
-            </p>
-            <p className="text-sm text-slate-500 italic">
-              {VA_SERVICES_INTRO.scopeNote}
+            <p className="text-sm text-slate-600">
+              Practical support services I am developing and available to undertake at an entry-level scope for individuals, small business owners, or community organizations.
             </p>
           </div>
 
-          {/* 7 VA Service Cards */}
+          {/* 6 Clean Skill Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {VA_SERVICES.map((service, index) => (
+            {VA_SKILLS.map((skill, index) => (
               <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 16 }}
+                key={skill.title}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-30px' }}
-                transition={{ duration: 0.45, delay: index * 0.06 }}
-                className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-300 transition-all duration-200 flex flex-col justify-between"
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-2xs hover:shadow-xs hover:border-indigo-300 transition-all flex flex-col justify-between"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center">
-                    {getVAIcon(service.iconName)}
+                    {getVASkillIcon(skill.iconName)}
                   </div>
-                  <h4 className="text-lg font-bold text-slate-900">
-                    {service.title}
+                  <h4 className="text-base font-bold text-slate-900">
+                    {skill.title}
                   </h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    {service.description}
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {skill.description}
                   </p>
                 </div>
 
-                <div className="pt-5 mt-4 border-t border-slate-100">
+                <div className="pt-4 mt-4 border-t border-slate-100">
                   <div className="flex flex-wrap gap-1.5">
-                    {service.skills.map((skill) => (
+                    {skill.tools.map((tool) => (
                       <span
-                        key={skill}
+                        key={tool}
                         className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 text-slate-600"
                       >
-                        {skill}
+                        {tool}
                       </span>
                     ))}
                   </div>
@@ -127,96 +115,74 @@ export const SkillsSection: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            CATEGORY B: POLITICAL & EQUITY ANALYSIS
+            PART 2: ACADEMIC & MARKET INTERESTS
            ========================================================================= */}
-        <div className="space-y-8 pt-6 border-t border-slate-200/90">
-          <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-purple-100/70 text-purple-800 text-xs font-bold uppercase tracking-wider">
-              Category B
+        <div className="space-y-6 pt-8 border-t border-slate-200">
+          <div className="space-y-1">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-purple-700">
+              Academic Interests &amp; Self-Study
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
-              {ANALYSIS_SERVICES_INTRO.headline}
+            <h3 className="text-2xl font-bold text-slate-900">
+              Political Analysis &amp; Equity Curiosity
             </h3>
-            <p className="text-lg font-medium text-slate-700 leading-relaxed">
-              {ANALYSIS_SERVICES_INTRO.intro}
+            <p className="text-sm text-slate-600">
+              Topics I explore as part of my university degree and independent reading. Not presented as professional advisory work, but as genuine intellectual curiosity.
             </p>
           </div>
 
-          {/* Mandatory Critical Disclaimer Alert Box */}
-          <div className="p-4 sm:p-5 rounded-xl bg-amber-50/90 border border-amber-200 text-amber-900 flex items-start gap-3.5 shadow-2xs">
-            <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-            <div className="space-y-1 text-xs sm:text-sm leading-relaxed">
-              <span className="font-bold uppercase tracking-wider text-amber-800 block text-xs">
-                Important Transparency Notice
-              </span>
-              <p className="text-amber-800/90">
-                {ANALYSIS_SERVICES_INTRO.disclaimer}
-              </p>
-            </div>
-          </div>
-
-          {/* 2 Focused Area Columns: Political Research & Equity Research */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {ANALYSIS_AREAS.map((area, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {INTEREST_AREAS.map((interest, index) => (
               <motion.div
-                key={area.id}
-                initial={{ opacity: 0, y: 20 }}
+                key={interest.title}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-7 sm:p-8 border border-slate-200/90 shadow-2xs hover:shadow-md transition-all duration-200 space-y-6"
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-2xs space-y-5"
               >
-                <div className="flex items-start gap-4">
-                  <div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${
-                      area.isEquity
-                        ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
-                        : 'bg-indigo-50 text-indigo-600 border border-indigo-100'
-                    }`}
-                  >
-                    {area.isEquity ? (
-                      <TrendingUp className="w-6 h-6" />
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 border border-purple-100 flex items-center justify-center shrink-0">
+                    {interest.iconName === 'Landmark' ? (
+                      <Landmark className="w-5 h-5 text-indigo-600" />
                     ) : (
-                      <Landmark className="w-6 h-6" />
+                      <TrendingUp className="w-5 h-5 text-emerald-600" />
                     )}
                   </div>
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                      {area.subtitle}
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                      {interest.category}
                     </span>
-                    <h4 className="text-xl sm:text-2xl font-bold text-slate-900">
-                      {area.title}
+                    <h4 className="text-lg font-bold text-slate-900">
+                      {interest.title}
                     </h4>
                   </div>
                 </div>
 
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {area.description}
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  {interest.description}
                 </p>
 
-                <div className="space-y-2.5 pt-2 border-t border-slate-100">
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                    Key Areas of Study &amp; Output
+                <div className="space-y-2 pt-2 border-t border-slate-100">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                    What I actively read &amp; learn:
                   </div>
-                  {area.items.map((item) => (
-                    <div key={item} className="flex items-center gap-2.5 text-sm text-slate-700">
-                      <CheckCircle2
-                        className={`w-4 h-4 shrink-0 ${
-                          area.isEquity ? 'text-emerald-600' : 'text-indigo-600'
-                        }`}
-                      />
+                  {interest.whatILearn.map((item) => (
+                    <div key={item} className="flex items-start gap-2 text-xs text-slate-700">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600 shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </div>
                   ))}
                 </div>
-
-                {area.isEquity && (
-                  <div className="text-[11px] text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-100 italic">
-                    Focus: Non-commercial educational study of domestic NGX companies, annual reports, and macro policy indicators.
-                  </div>
-                )}
               </motion.div>
             ))}
+          </div>
+
+          {/* Honest Transparency Note */}
+          <div className="p-4 rounded-xl bg-amber-50 border border-amber-200/80 text-xs text-amber-800 flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+            <p className="leading-relaxed">
+              <strong>Honest Note:</strong> I am a student building knowledge and practical experience. I do not provide licensed investment advice or professional research consultations. Any notes I make about markets or politics are for self-study and learning purposes only.
+            </p>
           </div>
         </div>
 

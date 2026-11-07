@@ -1,39 +1,21 @@
-export interface ProjectItem {
-  id: string;
-  title: string;
-  category: 'Political Research' | 'Equity Research' | 'Virtual Assistance';
-  projectType: 'Academic Work' | 'Independent Research' | 'Practice Project';
-  dateCompleted: string;
-  shortDescription: string;
-  skillsDemonstrated: string[];
-  overview: string;
-  keyTakeaways: string[];
-  deliverables?: string[];
-  disclaimer?: string;
-}
-
-export interface VAServiceItem {
-  id: string;
+export interface VASkill {
   title: string;
   description: string;
-  skills: string[];
+  tools: string[];
   iconName: string;
 }
 
-export interface AnalysisServiceArea {
-  id: string;
+export interface InterestArea {
   title: string;
-  subtitle: string;
+  category: 'Political Affairs & Policy' | 'Financial Markets & Business';
   description: string;
-  items: string[];
+  whatILearn: string[];
   iconName: string;
-  isEquity?: boolean;
 }
 
-export interface LearningPillar {
-  id: string;
+export interface VolunteerOpportunity {
   title: string;
-  description: string;
-  focusAreas: string[];
+  howICanHelp: string;
+  examples: string[];
   iconName: string;
 }

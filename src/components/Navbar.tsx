@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileText, ArrowRight } from 'lucide-react';
+import { Menu, X, FileText } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'motion/react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
@@ -23,7 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = ['home', 'about', 'what-i-do', 'portfolio', 'learning', 'contact'];
+      const sections = ['home', 'about', 'skills', 'volunteer', 'contact'];
       const scrollPosition = window.scrollY + 140;
 
       for (const section of sections) {
@@ -46,8 +46,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
     { name: 'About', href: '#about', id: 'about' },
-    { name: 'What I Do', href: '#what-i-do', id: 'what-i-do' },
-    { name: 'Portfolio', href: '#portfolio', id: 'portfolio' },
+    { name: 'Skills & Interests', href: '#skills', id: 'skills' },
+    { name: 'How I Can Help', href: '#volunteer', id: 'volunteer' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
       id="main-navbar"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 print:hidden ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm py-3.5 border-b border-slate-100'
+          ? 'bg-white/95 backdrop-blur-md shadow-xs py-3.5 border-b border-slate-100'
           : 'bg-white/80 backdrop-blur-sm py-5'
       }`}
     >
@@ -83,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo with William's photo thumbnail & clean typography */}
+        {/* Brand: Portrait thumbnail & William Okafor */}
         <a
           href="#home"
           onClick={(e) => scrollToSection(e, '#home')}
@@ -92,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
           <img
             src={PERSONAL_INFO.imagePath}
             alt={PERSONAL_INFO.fullName}
-            className="w-9 h-9 rounded-full object-cover border-2 border-indigo-600/40 shadow-xs group-hover:border-indigo-600 transition-colors"
+            className="w-9 h-9 rounded-full object-cover border-2 border-indigo-600/40 shadow-2xs group-hover:border-indigo-600 transition-colors"
           />
           <span className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
             William Okafor
@@ -136,9 +136,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
           <a
             href="#contact"
             onClick={(e) => scrollToSection(e, '#contact')}
-            className="px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-xs hover:shadow-sm transition-all cursor-pointer"
+            className="px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-2xs hover:shadow-xs transition-all cursor-pointer"
           >
-            Get In Touch
+            Let’s Connect
           </a>
         </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { PERSONAL_INFO, PROJECTS } from '../data/portfolioData';
-import { Mail, MapPin, Globe, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { PERSONAL_INFO, VOLUNTEER_WAYS } from '../data/portfolioData';
+import { Mail, MapPin, Globe, GraduationCap } from 'lucide-react';
 
 interface ExecutiveResumeSheetProps {
   isPreview?: boolean;
@@ -22,7 +22,7 @@ export const ExecutiveResumeSheet: React.FC<ExecutiveResumeSheetProps> = ({ isPr
             {PERSONAL_INFO.fullName.toUpperCase()}
           </h1>
           <div className="text-xs font-semibold text-indigo-700">
-            {PERSONAL_INFO.website}
+            Student CV / Volunteer Profile
           </div>
         </div>
 
@@ -41,7 +41,7 @@ export const ExecutiveResumeSheet: React.FC<ExecutiveResumeSheetProps> = ({ isPr
           </span>
           <span className="flex items-center gap-1">
             <Globe className="w-3.5 h-3.5 text-slate-400" />
-            https://{PERSONAL_INFO.website}
+            willyp.com.ng
           </span>
         </div>
       </div>
@@ -52,14 +52,14 @@ export const ExecutiveResumeSheet: React.FC<ExecutiveResumeSheetProps> = ({ isPr
           Personal Profile &amp; Objective
         </h2>
         <p className="text-xs text-slate-700 leading-relaxed">
-          Political Science student with a strong curiosity about public policy, institutional governance, and financial markets, alongside developing capabilities in virtual assistance and administrative support. Committed to honest, high-detail work, continuous learning, and seeking opportunities to contribute meaningfully to internships, entry-level administrative tasks, and research projects.
+          Political Science student at Crawford University with a genuine interest in governance, public policy, and financial markets, actively developing practical skills in virtual assistance and administrative support. Seeking opportunities to volunteer, intern, and assist individuals or small businesses with research, spreadsheets, and administrative tasks to gain real-world experience.
         </p>
       </div>
 
       {/* Education */}
       <div className="mb-5 space-y-2">
         <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-900 border-b border-slate-200 pb-1">
-          Education Details
+          Education
         </h2>
         <div className="flex justify-between items-baseline text-xs">
           <div>
@@ -69,74 +69,68 @@ export const ExecutiveResumeSheet: React.FC<ExecutiveResumeSheetProps> = ({ isPr
           <span className="text-indigo-700 font-bold text-[11px]">October 2024 – September 2028</span>
         </div>
         <div className="text-[11px] text-slate-600">
-          Undergraduate Degree. Core Study Areas: Governance, Public Policy Analysis, Political Economy, Institutional Frameworks, and Administrative Systems.
+          Undergraduate Degree. Core Study Areas: Public Administration, Governance Systems, Political Economy, Institutional Frameworks, and International Affairs.
         </div>
       </div>
 
-      {/* Core Skills & Tools */}
+      {/* Core Skills & Practical Tools */}
       <div className="mb-5 space-y-2">
         <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-900 border-b border-slate-200 pb-1">
-          Developing Skills &amp; Tools
+          Skills &amp; Capabilities
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <div>
             <div className="font-bold text-slate-800 text-[11px] uppercase tracking-wider mb-1">
-              Virtual Assistance &amp; Administration
+              Virtual Assistance &amp; Admin Support
             </div>
             <ul className="list-disc list-inside text-slate-600 space-y-0.5 text-[11px]">
-              <li>Online research, fact-checking &amp; source verification</li>
-              <li>Data entry, spreadsheet formatting &amp; deduplication</li>
-              <li>Document formatting &amp; executive layout (Word, Google Docs)</li>
-              <li>Inbox organisation, scheduling &amp; calendar management</li>
-              <li>Standard operating procedures &amp; cloud filing systems</li>
+              <li>Online research, fact-checking &amp; source gathering</li>
+              <li>Data entry, spreadsheet formatting &amp; list cleaning</li>
+              <li>Document formatting &amp; proofreading (Word, Google Docs)</li>
+              <li>Inbox organization &amp; calendar appointment scheduling</li>
+              <li>Google Drive &amp; OneDrive file management</li>
             </ul>
           </div>
 
           <div>
             <div className="font-bold text-slate-800 text-[11px] uppercase tracking-wider mb-1">
-              Analytical &amp; Software Proficiency
+              Tools &amp; Learning Interests
             </div>
             <ul className="list-disc list-inside text-slate-600 space-y-0.5 text-[11px]">
-              <li>Microsoft Excel (developing: SUMIFS, XLOOKUP, validation)</li>
-              <li>Google Workspace (Sheets, Docs, Slides, Drive)</li>
-              <li>Basic financial statement analysis (Balance Sheet, P&amp;L)</li>
-              <li>Nigerian Exchange (NGX) equities tracking &amp; annual reports</li>
-              <li>Policy impact assessment &amp; structured briefing</li>
+              <li>Microsoft Excel (developing: SUM, AVERAGE, IF, VLOOKUP)</li>
+              <li>Google Workspace (Docs, Sheets, Slides, Drive)</li>
+              <li>Reading basic financial statements (educational learning)</li>
+              <li>Tracking Nigerian Exchange (NGX) company news</li>
+              <li>Drafting clean summary notes and meeting minutes</li>
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Practical Projects & Demonstrations */}
+      {/* Volunteer Readiness & How I Can Assist */}
       <div className="mb-5 space-y-2.5">
         <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-900 border-b border-slate-200 pb-1">
-          Selected Projects &amp; Demonstrations
+          Ways I Can Help (Volunteer &amp; Entry-Level Support)
         </h2>
         
-        <div className="space-y-2.5 text-xs">
-          {PROJECTS.slice(0, 4).map((project) => (
-            <div key={project.id} className="space-y-0.5">
-              <div className="flex justify-between items-baseline">
-                <span className="font-bold text-slate-900 text-[11px]">
-                  {project.title}
-                </span>
-                <span className="text-[10px] text-slate-500">{project.dateCompleted}</span>
-              </div>
-              <div className="text-[10px] font-semibold text-indigo-700">
-                {project.category} • {project.projectType}
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+          {VOLUNTEER_WAYS.map((way) => (
+            <div key={way.title} className="p-2.5 bg-slate-50 rounded-lg border border-slate-100 space-y-1">
+              <span className="font-bold text-slate-900 text-[11px]">
+                {way.title}
+              </span>
               <p className="text-[11px] text-slate-600 leading-normal">
-                {project.shortDescription}
+                {way.howICanHelp}
               </p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Work Values & Disclaimer */}
+      {/* Work Values & Note */}
       <div className="pt-2 border-t border-slate-200 text-[10px] text-slate-500 flex flex-col sm:flex-row justify-between gap-2">
-        <span>Work Philosophy: Curiosity • Attention to Detail • Consistency • Willingness to Learn</span>
-        <span className="italic">All financial research is for educational demonstration only.</span>
+        <span>Work Approach: Curiosity • Attention to Detail • Consistency • Willingness to Learn</span>
+        <span className="italic">Available for remote volunteering and entry-level support.</span>
       </div>
     </div>
   );
