@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileDown, ArrowUpRight } from 'lucide-react';
+import { Menu, X, FileText, ArrowRight } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'motion/react';
+import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface NavbarProps {
   onOpenResume: () => void;
@@ -11,7 +12,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // Smooth scroll progress bar at top of window
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -23,8 +23,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      const sections = ['home', 'about', 'skills', 'projects', 'vision', 'contact'];
-      const scrollPosition = window.scrollY + 160;
+      const sections = ['home', 'about', 'what-i-do', 'portfolio', 'learning', 'contact'];
+      const scrollPosition = window.scrollY + 140;
 
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -44,12 +44,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
   }, []);
 
   const navLinks = [
-    { name: 'HOME', href: '#home', id: 'home' },
-    { name: 'ABOUT', href: '#about', id: 'about' },
-    { name: 'SKILLS', href: '#skills', id: 'skills' },
-    { name: 'PORTFOLIO', href: '#projects', id: 'projects' },
-    { name: 'ACADEMIC & VISION', href: '#vision', id: 'vision' },
-    { name: 'CONTACT', href: '#contact', id: 'contact' },
+    { name: 'Home', href: '#home', id: 'home' },
+    { name: 'About', href: '#about', id: 'about' },
+    { name: 'What I Do', href: '#what-i-do', id: 'what-i-do' },
+    { name: 'Portfolio', href: '#portfolio', id: 'portfolio' },
+    { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -79,140 +78,139 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
     >
       {/* Top Smooth Scroll Reading Progress Indicator */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600 origin-left"
+        className="absolute top-0 left-0 right-0 h-[2px] bg-indigo-600 origin-left"
         style={{ scaleX }}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo styled exactly like SATNER in screenshot */}
+        {/* Brand Logo with William's photo thumbnail & clean typography */}
         <a
           href="#home"
           onClick={(e) => scrollToSection(e, '#home')}
-          className="flex items-center gap-1.5 text-2xl sm:text-3xl font-extrabold tracking-wider text-slate-900 group transition-transform duration-200 hover:scale-[1.02]"
+          className="flex items-center gap-3 group transition-transform duration-200 hover:scale-[1.01]"
         >
-          <span className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-600 bg-clip-text text-transparent uppercase tracking-widest font-['Space_Grotesk']">
-            WILLIAM
-          </span>
-          <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block group-hover:scale-125 group-hover:bg-purple-600 transition-all duration-300" />
+          <img
+            src={PERSONAL_INFO.imagePath}
+            alt={PERSONAL_INFO.fullName}
+            className="w-9 h-9 rounded-full object-cover border-2 border-indigo-600/40 shadow-xs group-hover:border-indigo-600 transition-colors"
+          />
+          <div>
+            <div className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
+              William Okafor
+            </div>
+            <div className="text-[11px] font-medium text-slate-500 tracking-wide uppercase">
+              {PERSONAL_INFO.website}
+            </div>
+          </div>
         </a>
 
-        {/* Desktop Nav Items with Hover Transitions */}
-        <nav className="hidden lg:flex items-center space-x-7">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            return (
-              <a
-                key={link.id}
-                href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
-                className={`text-xs font-bold tracking-widest uppercase transition-all duration-200 relative py-1 hover:-translate-y-0.5 ${
-                  isActive
-                    ? 'text-indigo-600 font-extrabold'
-                    : 'text-slate-600 hover:text-indigo-600'
-                }`}
-              >
-                {link.name}
-                {isActive ? (
-                  <motion.span
-                    layoutId="activeNavIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-600 rounded-full"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                ) : (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-200 rounded-full scale-x-0 hover:scale-x-100 transition-transform duration-200 origin-left" />
-                )}
-              </a>
-            );
-          })}
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center space-x-7">
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={link.href}
+              onClick={(e) => scrollToSection(e, link.href)}
+              className={`text-sm font-medium transition-colors duration-200 relative py-1 ${
+                activeSection === link.id
+                  ? 'text-indigo-600 font-semibold'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              {link.name}
+              {activeSection === link.id && (
+                <motion.div
+                  layoutId="activeNavIndicator"
+                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-indigo-600 rounded-full"
+                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                />
+              )}
+            </a>
+          ))}
         </nav>
 
-        {/* Desktop Right CTA with Interactive Hover Effects */}
-        <div className="hidden lg:flex items-center space-x-3">
+        {/* Action Button: View CV/Resume */}
+        <div className="hidden md:flex items-center gap-3">
           <button
-            id="nav-get-cv-btn"
             onClick={onOpenResume}
-            className="flex items-center gap-1.5 px-4 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg text-xs font-bold tracking-wider uppercase hover:bg-indigo-50 hover:border-indigo-700 hover:text-indigo-700 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 shadow-sm cursor-pointer"
+            className="px-4 py-2 text-xs font-semibold text-slate-700 hover:text-indigo-600 border border-slate-200 hover:border-indigo-300 rounded-lg bg-slate-50/80 hover:bg-white transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
           >
-            <FileDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
-            <span>GET CV</span>
+            <FileText className="w-3.5 h-3.5 text-indigo-600" />
+            <span>View Resume</span>
           </button>
           <a
-            id="nav-hire-me-btn"
             href="#contact"
             onClick={(e) => scrollToSection(e, '#contact')}
-            className="flex items-center gap-1.5 px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg text-xs font-bold tracking-wider uppercase shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/45 hover:from-indigo-700 hover:to-indigo-800 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer"
+            className="px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-xs hover:shadow-sm transition-all cursor-pointer"
           >
-            <span>HIRE ME</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            Get In Touch
           </a>
         </div>
 
-        {/* Mobile Hamburger */}
-        <div className="flex items-center lg:hidden space-x-2">
+        {/* Mobile Menu Toggle Button */}
+        <div className="flex md:hidden items-center gap-2">
           <button
             onClick={onOpenResume}
-            className="p-2 text-indigo-600 hover:bg-indigo-50 active:scale-95 rounded-lg border border-indigo-200 transition-transform"
-            title="View CV"
+            className="p-2 text-slate-600 hover:text-indigo-600 rounded-lg border border-slate-200"
+            title="View Resume"
           >
-            <FileDown className="w-4 h-4" />
+            <FileText className="w-4 h-4" />
           </button>
           <button
-            id="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-slate-700 hover:text-indigo-600 active:scale-95 focus:outline-none transition-transform"
-            aria-label="Toggle Navigation Menu"
+            className="p-2 text-slate-700 hover:text-indigo-600 rounded-lg hover:bg-slate-100 transition-colors"
+            aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Dropdown Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 shadow-xl px-4 pt-3 pb-6 space-y-3 animate-in fade-in slide-in-from-top-3 duration-200">
-          <div className="flex flex-col space-y-2">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
-              return (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
-                  className={`px-3 py-2.5 rounded-lg text-sm font-bold tracking-wider uppercase transition-colors ${
-                    isActive
-                      ? 'bg-indigo-50 text-indigo-700 font-extrabold'
-                      : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-600'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          className="md:hidden bg-white border-b border-slate-200 px-5 pt-3 pb-6 shadow-lg"
+        >
+          <div className="space-y-3">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={(e) => scrollToSection(e, link.href)}
+                className={`block py-2 text-base font-medium rounded-lg px-3 transition-colors ${
+                  activeSection === link.id
+                    ? 'text-indigo-600 bg-indigo-50/80 font-semibold'
+                    : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                {link.name}
+              </a>
+            ))}
+            <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenResume();
+                }}
+                className="w-full py-2.5 text-sm font-semibold text-slate-700 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center gap-2"
+              >
+                <FileText className="w-4 h-4 text-indigo-600" />
+                <span>View Resume / CV</span>
+              </button>
+              <a
+                href="#contact"
+                onClick={(e) => scrollToSection(e, '#contact')}
+                className="w-full py-2.5 text-sm font-semibold text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg"
+              >
+                Let’s Connect
+              </a>
+            </div>
           </div>
-
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenResume();
-              }}
-              className="w-full py-2.5 border-2 border-indigo-600 text-indigo-600 rounded-lg text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-indigo-50 active:bg-indigo-100 transition-colors"
-            >
-              <FileDown className="w-4 h-4" />
-              <span>VIEW / DOWNLOAD CV</span>
-            </button>
-            <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, '#contact')}
-              className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md shadow-indigo-600/30 text-center transition-colors"
-            >
-              <span>GET IN TOUCH / HIRE ME</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
+        </motion.div>
       )}
     </header>
   );
 };
-

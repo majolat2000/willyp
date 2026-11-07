@@ -1,313 +1,304 @@
 import React, { useState } from 'react';
 import { PROJECTS } from '../data/portfolioData';
+import { ProjectItem } from '../types';
 import {
+  FileText,
   TrendingUp,
-  PieChart,
-  CheckCircle,
-  ExternalLink,
+  Landmark,
+  FileSpreadsheet,
+  Calendar,
   Layers,
   ArrowRight,
-  ShieldAlert,
-  Percent,
-  Coins,
-  Wallet,
-  Building,
+  X,
+  CheckCircle2,
+  AlertCircle,
+  ExternalLink,
+  ShieldCheck,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export const ProjectsSection: React.FC = () => {
-  const [selectedProjectId, setSelectedProjectId] = useState<string>(PROJECTS[0].id);
+  const [activeFilter, setActiveFilter] = useState<string>('All');
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
-  // Nigerian Equities Mock Simulator Data for William's study
-  const nigerianBankingStocks = [
-    { ticker: 'GTCO', name: 'Guaranty Trust Holding Co.', pe: '3.8x', divYield: '10.2%', roe: '28.5%', stance: 'Long-term Core' },
-    { ticker: 'ZENITHBANK', name: 'Zenith Bank Plc', pe: '3.2x', divYield: '11.8%', roe: '26.1%', stance: 'High Dividend Stability' },
-    { ticker: 'ACCESSCORP', name: 'Access Holdings Plc', pe: '2.9x', divYield: '9.4%', roe: '22.0%', stance: 'Pan-African Scale' },
-    { ticker: 'UBA', name: 'United Bank for Africa', pe: '2.7x', divYield: '12.4%', roe: '31.2%', stance: 'Compounding Value' },
-  ];
+  const categories = ['All', 'Political Research', 'Equity Research', 'Virtual Assistance'];
 
-  // Budget Simulator State
-  const [monthlyIncome, setMonthlyIncome] = useState<number>(350000); // ₦350,000 illustrative monthly base
-  const [savingsRate, setSavingsRate] = useState<number>(25); // 25%
+  const filteredProjects =
+    activeFilter === 'All'
+      ? PROJECTS
+      : PROJECTS.filter((p) => p.category === activeFilter);
 
-  const savingsAmount = Math.round((monthlyIncome * savingsRate) / 100);
-  const essentialsAmount = Math.round((monthlyIncome * 55) / 100);
-  const discretionaryAmount = monthlyIncome - savingsAmount - essentialsAmount;
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'Political Research':
+        return <Landmark className="w-4 h-4 text-indigo-600" />;
+      case 'Equity Research':
+        return <TrendingUp className="w-4 h-4 text-emerald-600" />;
+      case 'Virtual Assistance':
+        return <FileSpreadsheet className="w-4 h-4 text-blue-600" />;
+      default:
+        return <FileText className="w-4 h-4 text-slate-600" />;
+    }
+  };
 
-  const currentProject = PROJECTS.find((p) => p.id === selectedProjectId) || PROJECTS[0];
+  const getProjectTypeColor = (type: string) => {
+    switch (type) {
+      case 'Academic Work':
+        return 'bg-purple-50 text-purple-700 border-purple-200';
+      case 'Independent Research':
+        return 'bg-indigo-50 text-indigo-700 border-indigo-200';
+      case 'Practice Project':
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      default:
+        return 'bg-slate-100 text-slate-700 border-slate-200';
+    }
+  };
 
   return (
-    <section id="projects" className="py-20 lg:py-28 bg-slate-50/60 border-t border-slate-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="portfolio" className="py-20 lg:py-28 bg-white border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16 space-y-3"
+          className="text-center max-w-3xl mx-auto space-y-3"
         >
-          <span className="text-xs sm:text-sm font-bold tracking-[0.25em] text-indigo-600 uppercase">
-            PORTFOLIO &amp; WORK
+          <span className="text-xs font-bold tracking-widest text-indigo-600 uppercase">
+            Portfolio &amp; Selected Work
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-['Space_Grotesk']">
-            PROJECTS &amp; EXPERIENCE
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight">
+            Actual Projects &amp; Demonstrations
           </h2>
-          <div className="w-16 h-1 bg-indigo-600 mx-auto rounded-full mt-2" />
-          <p className="text-slate-600 text-base sm:text-lg pt-2">
-            Hands-on financial research, domestic equities analysis, and empirical personal capital management.
+          <p className="text-slate-600 text-base sm:text-lg">
+            Practical demonstrations of developing skills across political analysis, equity research, and virtual assistance. Clearly labeled as academic, independent research, or practice projects.
           </p>
         </motion.div>
 
-        {/* Project Selection Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {PROJECTS.map((project) => (
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap justify-center gap-2.5">
+          {categories.map((category) => (
             <button
-              key={project.id}
-              onClick={() => setSelectedProjectId(project.id)}
-              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold tracking-wider uppercase transition-all duration-200 flex items-center gap-2 cursor-pointer ${
-                selectedProjectId === project.id
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 scale-[1.02]'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 hover:shadow-xs'
+              key={category}
+              onClick={() => setActiveFilter(category)}
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                activeFilter === category
+                  ? 'bg-indigo-600 text-white shadow-xs'
+                  : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200'
               }`}
             >
-              {project.id === 'nigerian-equities-research' ? (
-                <TrendingUp className="w-4 h-4" />
-              ) : (
-                <PieChart className="w-4 h-4" />
-              )}
-              <span>{project.title}</span>
+              {category}
             </button>
           ))}
         </div>
 
-        {/* Main Active Project Card */}
-        <motion.div
-          key={currentProject.id}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden mb-12"
-        >
-          <div className="p-6 sm:p-10 lg:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-              {/* Left Column: Project Overview & Core Bullet Points */}
-              <div className="lg:col-span-6 space-y-6">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-3 py-1 bg-indigo-50 text-indigo-700 font-bold text-xs uppercase tracking-wider rounded-md">
-                    {currentProject.category}
-                  </span>
-                  <span className="text-xs font-medium text-slate-400">
-                    {currentProject.period}
+        {/* Project Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              layout
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.35, delay: index * 0.05 }}
+              className="bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-indigo-300 transition-all duration-200 flex flex-col justify-between overflow-hidden group"
+            >
+              <div className="p-6 sm:p-7 space-y-4">
+                {/* Category & Project Type Chips */}
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
+                    {getCategoryIcon(project.category)}
+                    <span>{project.category}</span>
+                  </div>
+                  <span
+                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${getProjectTypeColor(
+                      project.projectType
+                    )}`}
+                  >
+                    {project.projectType}
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-['Space_Grotesk']">
-                  {currentProject.title}
+                {/* Project Title */}
+                <h3 className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors leading-snug">
+                  {project.title}
                 </h3>
 
-                <p className="text-slate-600 text-base leading-relaxed">
-                  {currentProject.summary}
+                {/* Short Description */}
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  {project.shortDescription}
                 </p>
 
-                {/* Core Activities from Prompt */}
-                <div className="space-y-3 pt-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Core Methodologies &amp; Execution
-                  </h4>
-                  <ul className="space-y-2.5">
-                    {currentProject.bulletPoints.map((point, index) => (
-                      <li key={index} className="flex items-start gap-3 text-sm sm:text-base text-slate-700">
-                        <CheckCircle className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Key Insights */}
-                <div className="space-y-3 pt-4 border-t border-slate-100">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Key Analytical Insights
-                  </h4>
-                  <div className="space-y-2">
-                    {currentProject.keyInsights.map((insight, idx) => (
-                      <div
-                        key={idx}
-                        className="p-3 bg-slate-50 rounded-xl border border-slate-200/60 text-xs sm:text-sm text-slate-700"
-                      >
-                        {insight}
-                      </div>
-                    ))}
+                {/* Skills Demonstrated */}
+                <div className="space-y-1.5 pt-2">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    Skills Demonstrated
                   </div>
-                </div>
-
-                {/* Tools & Frameworks */}
-                <div className="pt-2">
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                    Applied Competencies
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {currentProject.toolsUsed.map((tool) => (
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.skillsDemonstrated.map((skill) => (
                       <span
-                        key={tool}
-                        className="px-3 py-1 bg-indigo-50/70 text-indigo-700 font-semibold text-xs rounded-lg border border-indigo-100"
+                        key={skill}
+                        className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-50 text-slate-600 border border-slate-100"
                       >
-                        {tool}
+                        {skill}
                       </span>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: Interactive Project Preview / Case Study */}
-              <div className="lg:col-span-6 bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col justify-between">
-                {currentProject.id === 'nigerian-equities-research' ? (
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Building className="w-5 h-5 text-indigo-600" />
-                        <span className="text-sm font-bold text-slate-900 uppercase tracking-wide">
-                          Nigerian Equities Watchlist
-                        </span>
-                      </div>
-                      <span className="text-xs px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-full">
-                        NGX Banking
+              {/* Bottom Card Footer: Date & View Project Button */}
+              <div className="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                  <span>{project.dateCompleted}</span>
+                </div>
+
+                <button
+                  onClick={() => setSelectedProject(project)}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-700 cursor-pointer"
+                >
+                  <span>View Project</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* =========================================================================
+            INTERACTIVE PROJECT DETAILS MODAL
+           ========================================================================= */}
+        <AnimatePresence>
+          {selectedProject && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                className="bg-white rounded-2xl max-w-2xl w-full border border-slate-200 shadow-xl overflow-hidden my-8"
+              >
+                {/* Modal Header */}
+                <div className="p-6 bg-slate-50 border-b border-slate-100 flex items-start justify-between gap-4">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+                        {selectedProject.category}
+                      </span>
+                      <span className="text-xs text-slate-300">•</span>
+                      <span
+                        className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${getProjectTypeColor(
+                          selectedProject.projectType
+                        )}`}
+                      >
+                        {selectedProject.projectType}
                       </span>
                     </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
+                      {selectedProject.title}
+                    </h3>
+                    <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>Completed: {selectedProject.dateCompleted}</span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
 
-                    <p className="text-xs text-slate-600">
-                      Sample evaluation framework tracking Nigerian tier-1 banking institutions, dividend cover, and policy risk tolerance during macroeconomic reforms.
+                {/* Modal Body */}
+                <div className="p-6 sm:p-8 space-y-6 max-h-[70vh] overflow-y-auto">
+                  {/* Overview */}
+                  <div className="space-y-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Project Overview
+                    </h4>
+                    <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
+                      {selectedProject.overview}
                     </p>
+                  </div>
 
-                    <div className="space-y-2.5">
-                      {nigerianBankingStocks.map((stock) => (
-                        <div
-                          key={stock.ticker}
-                          className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-2xs hover:border-indigo-300 transition-colors"
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-extrabold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">
-                                {stock.ticker}
-                              </span>
-                              <span className="text-xs font-semibold text-slate-800 truncate max-w-[160px] sm:max-w-none">
-                                {stock.name}
-                              </span>
-                            </div>
-                            <span className="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-                              {stock.stance}
-                            </span>
-                          </div>
-                          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 text-center">
-                            <div>
-                              <div className="text-[10px] text-slate-400 uppercase font-medium">P/E Ratio</div>
-                              <div className="text-xs font-bold text-slate-800">{stock.pe}</div>
-                            </div>
-                            <div>
-                              <div className="text-[10px] text-slate-400 uppercase font-medium">Div. Yield</div>
-                              <div className="text-xs font-bold text-indigo-600">{stock.divYield}</div>
-                            </div>
-                            <div>
-                              <div className="text-[10px] text-slate-400 uppercase font-medium">ROE</div>
-                              <div className="text-xs font-bold text-slate-800">{stock.roe}</div>
-                            </div>
-                          </div>
+                  {/* Key Takeaways & Methodology */}
+                  <div className="space-y-3 pt-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Key Takeaways &amp; Methodology
+                    </h4>
+                    <div className="space-y-2">
+                      {selectedProject.keyTakeaways.map((point, i) => (
+                        <div key={i} className="flex items-start gap-2.5 text-sm text-slate-700">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{point}</span>
                         </div>
                       ))}
                     </div>
+                  </div>
 
-                    <div className="p-3.5 bg-amber-50/90 rounded-xl border border-amber-200/80 text-xs text-amber-900 flex items-start gap-2.5">
-                      <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="font-semibold">Risk Management Rule:</strong> Capped single-position weighting at 15% and maintained strict liquidity buffers to navigate currency fluctuations.
+                  {/* Deliverables / Output */}
+                  {selectedProject.deliverables && (
+                    <div className="space-y-2 pt-2">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                        Completed Deliverables
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.deliverables.map((deliv) => (
+                          <span
+                            key={deliv}
+                            className="px-3 py-1 bg-slate-100 text-slate-700 rounded-lg text-xs font-medium"
+                          >
+                            {deliv}
+                          </span>
+                        ))}
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Wallet className="w-5 h-5 text-indigo-600" />
-                        <span className="text-sm font-bold text-slate-900 uppercase tracking-wide">
-                          Dynamic Budgeting Model
+                  )}
+
+                  {/* Skills Demonstrated */}
+                  <div className="space-y-2 pt-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                      Skills Applied
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {selectedProject.skillsDemonstrated.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100"
+                        >
+                          {skill}
                         </span>
-                      </div>
-                      <span className="text-xs px-2.5 py-1 bg-indigo-100 text-indigo-800 font-bold rounded-full">
-                        Interactive System
-                      </span>
-                    </div>
-
-                    <p className="text-xs text-slate-600">
-                      Adjust the monthly capital pool and savings allocation slider to test William&apos;s personal finance optimization framework.
-                    </p>
-
-                    {/* Monthly Income Input / Slider */}
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-xs font-bold">
-                        <span className="text-slate-600">Monthly Cash Inflow</span>
-                        <span className="text-indigo-600">₦{monthlyIncome.toLocaleString()}</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="100000"
-                        max="1000000"
-                        step="25000"
-                        value={monthlyIncome}
-                        onChange={(e) => setMonthlyIncome(Number(e.target.value))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
-                      />
-                    </div>
-
-                    {/* Savings Rate Slider */}
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-xs font-bold">
-                        <span className="text-slate-600">Target Savings / Investment Rate</span>
-                        <span className="text-emerald-600 font-extrabold">{savingsRate}%</span>
-                      </div>
-                      <input
-                        type="range"
-                        min="10"
-                        max="50"
-                        step="5"
-                        value={savingsRate}
-                        onChange={(e) => setSavingsRate(Number(e.target.value))}
-                        className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600"
-                      />
-                    </div>
-
-                    {/* Breakdown Visualizer */}
-                    <div className="grid grid-cols-3 gap-2 text-center pt-2">
-                      <div className="p-3 bg-white rounded-xl border border-slate-200">
-                        <div className="text-[10px] text-slate-400 uppercase font-semibold">Essentials (55%)</div>
-                        <div className="text-xs sm:text-sm font-bold text-slate-800 mt-1">₦{essentialsAmount.toLocaleString()}</div>
-                      </div>
-                      <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200">
-                        <div className="text-[10px] text-emerald-700 uppercase font-semibold">Invested ({savingsRate}%)</div>
-                        <div className="text-xs sm:text-sm font-bold text-emerald-700 mt-1">₦{savingsAmount.toLocaleString()}</div>
-                      </div>
-                      <div className="p-3 bg-white rounded-xl border border-slate-200">
-                        <div className="text-[10px] text-slate-400 uppercase font-semibold">Discretionary</div>
-                        <div className="text-xs sm:text-sm font-bold text-slate-800 mt-1">₦{Math.max(0, discretionaryAmount).toLocaleString()}</div>
-                      </div>
-                    </div>
-
-                    <div className="p-3.5 bg-indigo-50 rounded-xl border border-indigo-100 text-xs text-indigo-900">
-                      <strong>System Outcome:</strong> Prioritizes capital accumulation into high-yielding instruments before discretionary expenses are deployed.
+                      ))}
                     </div>
                   </div>
-                )}
 
-                <div className="pt-6 mt-6 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-500">
-                  <span>Category: <strong>{currentProject.badge}</strong></span>
-                  <span className="font-semibold text-indigo-600 flex items-center gap-1">
-                    Documented Case Study <ExternalLink className="w-3.5 h-3.5" />
-                  </span>
+                  {/* Educational Disclaimer for Equity Projects */}
+                  {selectedProject.disclaimer && (
+                    <div className="p-3.5 bg-amber-50 rounded-xl border border-amber-200/80 text-xs text-amber-800 flex items-start gap-2.5">
+                      <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                      <span>{selectedProject.disclaimer}</span>
+                    </div>
+                  )}
                 </div>
-              </div>
+
+                {/* Modal Footer */}
+                <div className="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end">
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="px-5 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer"
+                  >
+                    Close
+                  </button>
+                </div>
+              </motion.div>
             </div>
-          </div>
-        </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
     </section>
   );
