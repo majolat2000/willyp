@@ -46,8 +46,8 @@ ${PERSONAL_INFO.subheading}
 ${PERSONAL_INFO.supportingText}
 
 EDUCATION:
-Crawford University, Nigeria
-${PERSONAL_INFO.degree}
+Crawford University — BSc Political Science
+October 2024 – September 2028
 
 DEVELOPING CAPABILITIES:
 - Virtual Assistance: Internet & Online Research, Data Entry, Document Formatting, Inbox & Calendar Management, Directory Building.

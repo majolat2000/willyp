@@ -94,26 +94,35 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenResume }) => {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-5 space-y-4"
           >
-            {/* Card 1: Academic Background */}
-            <div className="p-6 bg-slate-50/80 rounded-2xl border border-slate-200/90 shadow-2xs">
-              <div className="flex items-start gap-3.5">
-                <div className="p-2.5 bg-indigo-100/80 text-indigo-700 rounded-xl shrink-0">
-                  <GraduationCap className="w-5 h-5" />
-                </div>
-                <div className="space-y-1">
-                  <div className="text-xs font-bold text-indigo-600 uppercase tracking-wider">
-                    Academic Background
+            {/* Card 1: Education Details */}
+            <div className="p-6 bg-indigo-50/40 rounded-2xl border-2 border-indigo-200/90 shadow-2xs space-y-3">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 bg-indigo-600 text-white rounded-xl shrink-0 shadow-2xs">
+                    <GraduationCap className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-slate-900">
-                    B.Sc. Political Science &amp; International Relations
-                  </h3>
-                  <p className="text-xs text-slate-600">
-                    {PERSONAL_INFO.university} • Undergraduate Student
-                  </p>
-                  <p className="text-xs text-slate-500 pt-1 leading-relaxed">
-                    Coursework covers comparative politics, political economy, public administration, international diplomacy, and institutional governance.
-                  </p>
+                  <div>
+                    <div className="text-xs font-bold text-indigo-700 uppercase tracking-wider">
+                      Education Details
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900 leading-tight">
+                      Crawford University
+                    </h3>
+                  </div>
                 </div>
+                <span className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-100 text-indigo-800 border border-indigo-200 shrink-0">
+                  Oct 2024 – Sep 2028
+                </span>
+              </div>
+
+              <div className="pt-1 border-t border-indigo-100/80 space-y-1.5 text-xs">
+                <div className="flex items-center justify-between text-slate-800 font-semibold text-sm">
+                  <span>Degree: BSc Political Science</span>
+                  <span className="text-[11px] font-normal text-slate-500">Undergraduate</span>
+                </div>
+                <p className="text-slate-600 leading-relaxed text-xs">
+                  Currently pursuing a Bachelor of Science (BSc) in Political Science at Crawford University (October 2024 – September 2028). Coursework covers governance, public policy, political economy, and institutional systems.
+                </p>
               </div>
             </div>
 

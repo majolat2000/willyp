@@ -84,12 +84,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResume }) => {
           {/* Education & Curriculum Vitae */}
           <div className="md:col-span-3 space-y-3">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-300">
-              Education
+              Education Details
             </div>
             <div className="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80 space-y-1 text-xs">
-              <div className="font-bold text-white">Crawford University, Nigeria</div>
-              <div className="text-slate-300">B.Sc. Political Science &amp; Int’l Relations</div>
-              <div className="text-indigo-400 text-[11px] pt-1">Undergraduate Student</div>
+              <div className="font-bold text-white">Crawford University</div>
+              <div className="text-slate-300 font-medium">BSc Political Science</div>
+              <div className="text-indigo-400 text-[11px] pt-1">October 2024 – September 2028</div>
             </div>
 
             {onOpenResume && (

@@ -94,14 +94,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume }) => {
             alt={PERSONAL_INFO.fullName}
             className="w-9 h-9 rounded-full object-cover border-2 border-indigo-600/40 shadow-xs group-hover:border-indigo-600 transition-colors"
           />
-          <div>
-            <div className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
-              William Okafor
-            </div>
-            <div className="text-[11px] font-medium text-slate-500 tracking-wide uppercase">
-              {PERSONAL_INFO.website}
-            </div>
-          </div>
+          <span className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
+            William Okafor
+          </span>
         </a>
 
         {/* Desktop Navigation Links */}

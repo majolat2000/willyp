@@ -32,8 +32,10 @@ export const PERSONAL_INFO = {
   location: 'Nigeria',
   email: 'wp0222137@gmail.com',
   linkedinUrl: 'https://www.linkedin.com/in/william-okafor-willyp',
-  university: 'Crawford University, Nigeria',
-  degree: 'B.Sc. Political Science & International Relations (Student)',
+  university: 'Crawford University',
+  degree: 'BSc Political Science',
+  period: 'October 2024 – September 2028',
+  educationSummary: 'Crawford University • BSc Political Science (October 2024 – September 2028)',
   imagePath: '/willyp.jpeg',
   website: 'willyp.com.ng',
 };
@@ -375,14 +377,14 @@ export const PROJECTS: ProjectItem[] = [
 export const LEARNING_PILLARS: LearningPillar[] = [
   {
     id: 'pillar-academic',
-    title: 'Academic Foundation',
+    title: 'Academic Foundation (Education)',
     description:
-      'Studying Political Science & International Relations at Crawford University, examining political philosophy, public governance, constitutional law, and development economics.',
+      'Pursuing a BSc in Political Science at Crawford University (October 2024 – September 2028), examining governance systems, public policy analysis, political institutions, and political economy.',
     focusAreas: [
-      'Political Theory & Institutions',
-      'Public Policy Analysis',
-      'International Diplomacy & Trade',
-      'Comparative Political Systems',
+      'Crawford University (2024 – 2028)',
+      'BSc Political Science',
+      'Public Policy & Governance',
+      'Political Economy & Institutions',
     ],
     iconName: 'GraduationCap',
   },

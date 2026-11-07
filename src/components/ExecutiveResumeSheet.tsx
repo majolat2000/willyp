@@ -59,17 +59,17 @@ export const ExecutiveResumeSheet: React.FC<ExecutiveResumeSheetProps> = ({ isPr
       {/* Education */}
       <div className="mb-5 space-y-2">
         <h2 className="text-xs font-extrabold uppercase tracking-widest text-slate-900 border-b border-slate-200 pb-1">
-          Education
+          Education Details
         </h2>
         <div className="flex justify-between items-baseline text-xs">
           <div>
-            <span className="font-bold text-slate-900">Crawford University, Nigeria</span>
-            <div className="text-slate-600">B.Sc. Political Science &amp; International Relations</div>
+            <span className="font-bold text-slate-900">Crawford University</span>
+            <div className="text-slate-700 font-semibold">BSc Political Science</div>
           </div>
-          <span className="text-slate-500 font-medium text-[11px]">Undergraduate Student (In Progress)</span>
+          <span className="text-indigo-700 font-bold text-[11px]">October 2024 – September 2028</span>
         </div>
-        <div className="text-[11px] text-slate-500">
-          Core Focus: Public Administration, Political Economy, Comparative Governance, International Diplomacy &amp; Treaty Analysis.
+        <div className="text-[11px] text-slate-600">
+          Undergraduate Degree. Core Study Areas: Governance, Public Policy Analysis, Political Economy, Institutional Frameworks, and Administrative Systems.
         </div>
       </div>
 

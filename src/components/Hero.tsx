@@ -74,11 +74,11 @@ export const Hero: React.FC<HeroProps> = () => {
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200/90 rounded-lg shadow-2xs font-medium">
                 <BookOpen className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
-                <span>Crawford University</span>
+                <span>Crawford University • BSc Political Science (Oct 2024 – Sep 2028)</span>
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200/90 rounded-lg shadow-2xs font-medium">
                 <Layers className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
-                <span>Virtual Assistance &amp; Market Research</span>
+                <span>Virtual Assistance &amp; Research</span>
               </div>
             </div>
 
@@ -131,11 +131,14 @@ export const Hero: React.FC<HeroProps> = () => {
                       <h3 className="font-bold text-slate-900 text-base sm:text-lg">
                         {PERSONAL_INFO.fullName}
                       </h3>
-                      <p className="text-xs sm:text-sm text-slate-500">
+                      <p className="text-xs font-semibold text-indigo-600">
                         {PERSONAL_INFO.university}
                       </p>
+                      <p className="text-xs text-slate-500">
+                        {PERSONAL_INFO.degree} • {PERSONAL_INFO.period}
+                      </p>
                     </div>
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                       Available
                     </span>
